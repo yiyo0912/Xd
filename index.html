@@ -161,15 +161,6 @@
       max-width:900px;
     }
 
-    .hero-sub{
-      font-family:'Inter', sans-serif;
-      text-transform:uppercase;
-      letter-spacing:.45em;
-      color:var(--gold-soft);
-      font-size:.8rem;
-      margin-bottom:22px;
-    }
-
     .hero h2{
       font-family:'Cinzel', serif;
       font-size:clamp(3.5rem, 8vw, 6.5rem);
@@ -319,32 +310,16 @@
       transform:scale(1.08);
     }
 
-    /* IMÁGENES */
-    .audiovisuales .card::before{
-      background-image:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop');
-    }
-
-    .imagenes .card::before{
-      background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop');
-    }
-
-    .textos .card::before{
-      background-image:url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1200&auto=format&fit=crop');
-    }
-
-    .audios .card::before{
-      background-image:url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop');
-    }
+    /* IMÁGENES DE FONDO */
+    .audiovisuales .card::before{ background-image:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop'); }
+    .imagenes .card::before{ background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'); }
+    .textos .card::before{ background-image:url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1200&auto=format&fit=crop'); }
+    .audios .card::before{ background-image:url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop'); }
 
     .card-overlay{
       position:absolute;
       inset:0;
-      background:
-      linear-gradient(
-        180deg,
-        rgba(0,0,0,.15),
-        rgba(0,0,0,.75)
-      );
+      background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.75));
     }
 
     .card-body{
@@ -376,16 +351,11 @@
       font-size:1.05rem;
     }
 
-    /* BOTÓN */
     .upload-btn{
       border:none;
       cursor:pointer;
       padding:14px 24px;
-      background:linear-gradient(
-        135deg,
-        var(--gold),
-        #f0d37b
-      );
+      background:linear-gradient(135deg, var(--gold), #f0d37b);
       color:#111;
       border-radius:999px;
       font-family:'Inter', sans-serif;
@@ -409,85 +379,110 @@
       min-height:90px;
     }
 
-    .file-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:12px 14px;
-      border-radius:12px;
-      margin-bottom:10px;
-      background:rgba(255,255,255,.03);
-      transition:.25s;
-    }
-
-    .file-item:hover{
-      background:rgba(255,255,255,.06);
-    }
-
     .file-link{
       text-decoration:none;
       color:var(--cream);
       font-family:'Inter', sans-serif;
       font-size:.88rem;
       transition:.25s;
+      display:block;
+      width:100%;
+      text-align:center;
     }
 
     .file-link:hover{
       color:var(--gold-soft);
     }
 
-    .loader{
-      margin-top:18px;
-      display:none;
-      color:var(--gold-soft);
-      font-family:'Inter', sans-serif;
-      letter-spacing:.2em;
-      text-transform:uppercase;
-      font-size:.68rem;
+    /* ========================================================
+       ESTILOS DE LA VENTANA FLOTANTE (MODAL COCKPIT)
+       ======================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 7, 10, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
     }
 
-    /* FOOTER */
-    footer{
-      border-top:1px solid var(--line);
-      padding:45px 20px;
-      text-align:center;
-      background:#0a0d12;
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
     }
 
-    footer h4{
-      font-family:'Cinzel', serif;
-      color:var(--gold-soft);
-      letter-spacing:.15em;
-      margin-bottom:12px;
+    .modal-container {
+      background: var(--bg-soft);
+      width: min(680px, 95%);
+      height: 80vh;
+      border-radius: 24px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: var(--shadow), 0 0 40px rgba(212, 175, 55, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.9);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    footer p{
-      color:#8f98a3;
-      font-size:.95rem;
+    .modal-overlay.active .modal-container {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      padding: 20px 30px;
+      background: rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h4 {
+      font-family: 'Cinzel', serif;
+      color: var(--gold-soft);
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+    }
+
+    .close-modal {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .close-modal:hover {
+      color: var(--gold);
+    }
+
+    .modal-body {
+      flex: 1;
+      background: #ffffff; /* Los Forms de Google se ven mejor sobre blanco si no usas complementos oscuros */
+      position: relative;
+    }
+
+    .modal-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
 
     /* RESPONSIVE */
     @media(max-width:768px){
-
-      nav{
-        padding:20px;
-      }
-
-      .hero{
-        min-height:75vh;
-      }
-
-      .hero h2{
-        font-size:3.4rem;
-      }
-
-      .hero p{
-        font-size:1.1rem;
-      }
-
-      .cards-grid{
-        grid-template-columns:1fr;
-      }
+      nav{ padding:20px; }
+      .hero{ min-height:75vh; }
+      .hero h2{ font-size:3.4rem; }
+      .hero p{ font-size:1.1rem; }
+      .cards-grid{ grid-template-columns:1fr; }
+      .modal-container { height: 90vh; }
     }
   </style>
 </head>
@@ -501,247 +496,172 @@
       <h1>Lucerna</h1>
       <span>Literatura Emergente</span>
     </div>
-
     <div class="nav-decoration"></div>
   </nav>
 
   <section class="hero">
-
     <div class="hero-glow"></div>
-
     <div class="hero-content">
-     
-
       <h2>Proyecto Final</h2>
-
       <p>
         Un espacio elegante y contemporáneo para preservar,
         compartir y organizar las expresiones creativas de
         Literatura Emergente.
       </p>
-
-      <a href="#contenido" class="hero-btn">
-        Explorar contenido ✦
-      </a>
+      <a href="#contenido" class="hero-btn">Explorar contenido ✦</a>
     </div>
   </section>
 
-  <div class="ornament">
-    ✦
-  </div>
+  <div class="ornament">✦</div>
 
   <section class="cards-section" id="contenido">
-
     <div class="section-title">
       <h3>Categorías Creativas</h3>
-      <p>
-        Gestiona y comparte materiales audiovisuales,
-        imágenes, textos y audios en un entorno visualmente memorable.
-      </p>
+      <p>Gestiona y comparte materiales audiovisuales, imágenes, textos y audios en un entorno visualmente memorable.</p>
     </div>
 
     <div class="cards-grid">
 
+      <!-- AUDIOVISUALES -->
       <div class="category-block audiovisuales">
         <div class="card">
           <div class="card-overlay"></div>
-
           <div class="card-body">
             <span class="card-icon">🎬</span>
-
-            <span class="card-label">
-              Audiovisuales
-            </span>
-
-            <p class="card-description">
-              Cortometrajes, videopoemas, documentales y piezas visuales.
-            </p>
-
-            <button class="upload-btn"
-              onclick="document.getElementById('inp-av').click()">
+            <span class="card-label">Audiovisuales</span>
+            <p class="card-description">Cortometrajes, videopoemas, documentales y piezas visuales.</p>
+            
+            <!-- Cambia el ID del formulario por el tuyo -->
+            <button class="upload-btn" onclick="abrirModal('https://docs.google.com/forms/d/e/1FAIpQLSfD_YOUR_FORM_ID_1/viewform?embedded=true', 'Formulario Audiovisuales')">
               Subir archivo
             </button>
-
-            <input
-              type="file"
-              id="inp-av"
-              accept="video/*"
-              style="display:none"
-              onchange="subirArchivo(this, 'audiovisuales')"
-            />
-
-            <div id="load-audiovisuales" class="loader">
-              Cargando...
-            </div>
           </div>
         </div>
-
-        <div class="file-list" id="list-audiovisuales">
-          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
+        <div class="file-list">
+          <!-- Link a tu carpeta de Drive pública para ver los archivos cargados -->
+          <a href="https://drive.google.com/drive/folders/TU_ID_CARPETA_1" target="_blank" class="file-link">
+            📁 Abrir Repositorio de Videos ↗
+          </a>
         </div>
       </div>
 
+      <!-- IMÁGENES -->
       <div class="category-block imagenes">
         <div class="card">
           <div class="card-overlay"></div>
-
           <div class="card-body">
             <span class="card-icon">🖼️</span>
-
-            <span class="card-label">
-              Imágenes
-            </span>
-
-            <p class="card-description">
-              Fotografías, ilustraciones y composiciones artísticas.
-            </p>
-
-            <button class="upload-btn"
-              onclick="document.getElementById('inp-img').click()">
+            <span class="card-label">Imágenes</span>
+            <p class="card-description">Fotografías, ilustraciones y composiciones artísticas.</p>
+            
+            <!-- Cambia el ID del formulario por el tuyo -->
+            <button class="upload-btn" onclick="abrirModal('https://docs.google.com/forms/d/e/1FAIpQLSfD_YOUR_FORM_ID_2/viewform?embedded=true', 'Formulario Imágenes')">
               Subir archivo
             </button>
-
-            <input
-              type="file"
-              id="inp-img"
-              accept="image/*"
-              style="display:none"
-              onchange="subirArchivo(this, 'imagenes')"
-            />
-
-            <div id="load-imagenes" class="loader">
-              Cargando...
-            </div>
           </div>
         </div>
-
-        <div class="file-list" id="list-imagenes">
-          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
+        <div class="file-list">
+          <a href="https://drive.google.com/drive/folders/TU_ID_CARPETA_2" target="_blank" class="file-link">
+            📁 Abrir Galería de Imágenes ↗
+          </a>
         </div>
       </div>
 
+      <!-- TEXTOS -->
       <div class="category-block textos">
         <div class="card">
           <div class="card-overlay"></div>
-
           <div class="card-body">
             <span class="card-icon">📝</span>
-
-            <span class="card-label">
-              Textos
-            </span>
-
-            <p class="card-description">
-              Ensayos, poemas, novelas y documentos académicos.
-            </p>
-
-            <button class="upload-btn"
-              onclick="document.getElementById('inp-txt').click()">
+            <span class="card-label">Textos</span>
+            <p class="card-description">Ensayos, poemas, novelas y documentos académicos.</p>
+            
+            <!-- Cambia el ID del formulario por el tuyo -->
+            <button class="upload-btn" onclick="abrirModal('https://docs.google.com/forms/d/e/1FAIpQLSfD_YOUR_FORM_ID_3/viewform?embedded=true', 'Formulario Textos')">
               Subir archivo
             </button>
-
-            <input
-              type="file"
-              id="inp-txt"
-              accept=".pdf,.doc,.docx,.txt"
-              style="display:none"
-              onchange="subirArchivo(this, 'textos')"
-            />
-
-            <div id="load-textos" class="loader">
-              Cargando...
-            </div>
           </div>
         </div>
-
-        <div class="file-list" id="list-textos">
-          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
+        <div class="file-list">
+          <a href="https://drive.google.com/drive/folders/TU_ID_CARPETA_3" target="_blank" class="file-link">
+            📁 Abrir Biblioteca de Textos ↗
+          </a>
         </div>
       </div>
 
+      <!-- AUDIOS -->
       <div class="category-block audios">
         <div class="card">
           <div class="card-overlay"></div>
-
           <div class="card-body">
             <span class="card-icon">🎙️</span>
-
-            <span class="card-label">
-              Audios
-            </span>
-
-            <p class="card-description">
-              Podcasts, narraciones, música experimental y registros sonoros.
-            </p>
-
-            <button class="upload-btn"
-              onclick="document.getElementById('inp-aud').click()">
+            <span class="card-label">Audios</span>
+            <p class="card-description">Podcasts, narraciones, música experimental y registros sonoros.</p>
+            
+            <!-- Cambia el ID del formulario por el tuyo -->
+            <button class="upload-btn" onclick="abrirModal('https://docs.google.com/forms/d/e/1FAIpQLSfD_YOUR_FORM_ID_4/viewform?embedded=true', 'Formulario Audios')">
               Subir archivo
             </button>
-
-            <input
-              type="file"
-              id="inp-aud"
-              accept="audio/*"
-              style="display:none"
-              onchange="subirArchivo(this, 'audios')"
-            />
-
-            <div id="load-audios" class="loader">
-              Cargando...
-            </div>
           </div>
         </div>
-
-        <div class="file-list" id="list-audios">
-          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
+        <div class="file-list">
+          <a href="https://drive.google.com/drive/folders/TU_ID_CARPETA_4" target="_blank" class="file-link">
+            📁 Abrir Fonoteca de Audios ↗
+          </a>
         </div>
       </div>
 
     </div>
   </section>
+
+  <!-- ========================================================
+       ESTRUCTURA DE LA VENTANA MODAL (HTML ÚNICO DINÁMICO)
+       ======================================================== -->
+  <div class="modal-overlay" id="modalForm">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h4 id="modalTitle">Subir Archivo</h4>
+        <button class="close-modal" onclick="cerrarModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- El iframe se cargará dinámicamente con JavaScript -->
+        <iframe id="formIframe" src="" allow="autoplay">Cargando formulario...</iframe>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <h4>LUCERNA</h4>
     <p>Proyecto Final · Literatura Emergente · Por: César Hdz xd</p>
   </footer>
 
+  <!-- ========================================================
+       CONTROL SCRIPT PARA LAS VENTANAS
+       ======================================================== -->
   <script>
-    // Lógica local para simular la subida sin Firebase
-    window.subirArchivo = (input, categoria) => {
-      const file = input.files[0];
-      if (!file) return;
+    const modal = document.getElementById('modalForm');
+    const iframe = document.getElementById('formIframe');
+    const title = document.getElementById('modalTitle');
 
-      const loader = document.getElementById(`load-${categoria}`);
-      const listContainer = document.getElementById(`list-${categoria}`);
-      
-      // Mostrar loader un momento
-      loader.style.display = "block";
+    function abrirModal(urlFormulario, tituloCategoria) {
+      title.innerText = tituloCategoria;
+      iframe.src = urlFormulario;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Evita scroll de fondo
+    }
 
-      setTimeout(() => {
-        // Eliminar el mensaje de "Sin archivos" si existe
-        if (listContainer.querySelector('p')) {
-          listContainer.innerHTML = '';
-        }
+    function cerrarModal() {
+      modal.classList.remove('active');
+      iframe.src = ""; // Resetea el iframe para que no consuma datos ni conserve respuestas previas
+      document.body.style.overflow = ''; // Devuelve el scroll al body
+    }
 
-        // Crear URL local del archivo
-        const url = URL.createObjectURL(file);
-
-        // Crear elemento en la lista
-        const item = document.createElement('div');
-        item.className = 'file-item';
-        item.innerHTML = `
-          <a href="${url}" target="_blank" class="file-link">
-            📄 ${file.name}
-          </a>
-        `;
-
-        listContainer.appendChild(item);
-        
-        loader.style.display = "none";
-        input.value = "";
-      }, 600);
-    };
+    // Cerrar también si hacen clic fuera de la cajita del formulario
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        cerrarModal();
+      }
+    });
   </script>
 
 </body>
