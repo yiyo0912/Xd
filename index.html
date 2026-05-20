@@ -18,471 +18,109 @@
       --text:#e8ecf1;
       --muted:#b6bec9;
       --line:rgba(255,255,255,.08);
-
-      --glass:rgba(255,255,255,.05);
       --shadow:0 10px 40px rgba(0,0,0,.45);
     }
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
 
     body{
       background:
         radial-gradient(circle at top left, rgba(212,175,55,.10), transparent 30%),
         radial-gradient(circle at bottom right, rgba(212,175,55,.08), transparent 25%),
         var(--bg);
-
       color:var(--text);
       font-family:'Cormorant Garamond', serif;
       overflow-x:hidden;
       min-height:100vh;
     }
 
-    /* TEXTURA */
     body::before{
-      content:'';
-      position:fixed;
-      inset:0;
-      background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events:none;
-      z-index:999;
+      content:''; position:fixed; inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:999;
     }
 
     .top-line{
-      width:100%;
-      height:5px;
-      background:
-      linear-gradient(
-        90deg,
-        #5f4b17,
-        var(--gold),
-        #fff2b0,
-        var(--gold),
-        #5f4b17
-      );
+      width:100%; height:5px;
+      background: linear-gradient(90deg, #5f4b17, var(--gold), #fff2b0, var(--gold), #5f4b17);
       box-shadow:0 0 15px rgba(212,175,55,.5);
     }
 
-    /* NAV */
     nav{
-      width:100%;
-      padding:24px 60px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      background:rgba(13,17,23,.75);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--line);
-      position:sticky;
-      top:0;
-      z-index:50;
+      width:100%; padding:24px 60px; display:flex; justify-content:space-between; align-items:center;
+      background:rgba(13,17,23,.75); backdrop-filter:blur(14px); border-bottom:1px solid var(--line);
+      position:sticky; top:0; z-index:50;
     }
 
-    .brand{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
+    .brand{ display:flex; flex-direction:column; gap:4px; }
+    .brand h1{ font-family:'Cinzel', serif; font-size:1.7rem; letter-spacing:.18em; color:var(--gold-soft); text-transform:uppercase; }
+    .brand span{ font-family:'Inter', sans-serif; font-size:.72rem; letter-spacing:.35em; color:#d7dbe0; opacity:.7; text-transform:uppercase; }
+    .nav-decoration{ width:90px; height:1px; background:linear-gradient(to right, transparent, var(--gold)); }
 
-    .brand h1{
-      font-family:'Cinzel', serif;
-      font-size:1.7rem;
-      letter-spacing:.18em;
-      color:var(--gold-soft);
-      text-transform:uppercase;
-    }
-
-    .brand span{
-      font-family:'Inter', sans-serif;
-      font-size:.72rem;
-      letter-spacing:.35em;
-      color:#d7dbe0;
-      opacity:.7;
-      text-transform:uppercase;
-    }
-
-    .nav-decoration{
-      width:90px;
-      height:1px;
-      background:linear-gradient(to right, transparent, var(--gold));
-    }
-
-    /* HERO */
-    .hero{
-      min-height:88vh;
-      position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:60px 30px;
-      overflow:hidden;
-    }
-
+    .hero{ min-height:88vh; position:relative; display:flex; align-items:center; justify-content:center; text-align:center; padding:60px 30px; overflow:hidden; }
     .hero::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      background:
-      linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.7)),
-      url('https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1920&auto=format&fit=crop');
-      background-size:cover;
-      background-position:center;
-      filter:brightness(.55);
-      transform:scale(1.05);
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.7)), url('https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1920&auto=format&fit=crop');
+      background-size:cover; background-position:center; filter:brightness(.55); transform:scale(1.05);
     }
 
-    .hero-glow{
-      position:absolute;
-      width:600px;
-      height:600px;
-      background:radial-gradient(circle, rgba(212,175,55,.18), transparent 70%);
-      filter:blur(30px);
-      animation:float 8s ease-in-out infinite;
-    }
+    .hero-content{ position:relative; z-index:2; max-width:900px; }
+    .hero h2{ font-family:'Cinzel', serif; font-size:clamp(3.5rem, 8vw, 6.5rem); line-height:1; color:#fff; text-shadow:0 10px 30px rgba(0,0,0,.6); margin-bottom:25px; }
+    .hero p{ max-width:760px; margin:auto; font-size:1.35rem; color:#e5e7eb; line-height:1.7; }
+    .hero-btn{ margin-top:40px; display:inline-flex; align-items:center; gap:10px; padding:15px 28px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.08); backdrop-filter:blur(10px); color:white; text-decoration:none; font-family:'Inter', sans-serif; text-transform:uppercase; letter-spacing:.2em; font-size:.75rem; transition:.35s; }
+    .hero-btn:hover{ background:var(--gold); color:#111; transform:translateY(-3px); box-shadow:0 12px 30px rgba(212,175,55,.3); }
 
-    @keyframes float{
-      0%{transform:translateY(0px);}
-      50%{transform:translateY(-25px);}
-      100%{transform:translateY(0px);}
-    }
+    .ornament{ display:flex; align-items:center; justify-content:center; gap:18px; margin:70px 0 50px; color:var(--gold); }
+    .ornament::before, .ornament::after{ content:''; width:120px; height:1px; background:linear-gradient(to right, transparent, var(--gold)); }
 
-    .hero-content{
-      position:relative;
-      z-index:2;
-      max-width:900px;
-    }
+    .cards-section{ width:min(1300px, 92%); margin:auto; padding-bottom:100px; }
+    .section-title{ text-align:center; margin-bottom:50px; }
+    .section-title h3{ font-family:'Cinzel', serif; font-size:2.8rem; color:white; margin-bottom:12px; }
+    .section-title p{ color:var(--muted); font-size:1.1rem; }
+    .cards-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:32px; }
 
-    .hero h2{
-      font-family:'Cinzel', serif;
-      font-size:clamp(3.5rem, 8vw, 6.5rem);
-      line-height:1;
-      color:#fff;
-      text-shadow:0 10px 30px rgba(0,0,0,.6);
-      margin-bottom:25px;
-    }
+    .category-block{ border-radius:24px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.08); backdrop-filter:blur(12px); box-shadow:var(--shadow); transition:.45s ease; position:relative; }
+    .category-block:hover{ transform:translateY(-10px); border-color:rgba(212,175,55,.5); box-shadow: 0 20px 50px rgba(0,0,0,.5), 0 0 30px rgba(212,175,55,.12); }
+    
+    .card{ position:relative; height:270px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .card::before{ content:''; position:absolute; inset:0; background-size:cover; background-position:center; transition:transform .7s ease; filter:brightness(.55); }
+    .category-block:hover .card::before{ transform:scale(1.08); }
 
-    .hero p{
-      max-width:760px;
-      margin:auto;
-      font-size:1.35rem;
-      color:#e5e7eb;
-      line-height:1.7;
-    }
-
-    .hero-btn{
-      margin-top:40px;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:15px 28px;
-      border:1px solid rgba(255,255,255,.2);
-      background:rgba(255,255,255,.08);
-      backdrop-filter:blur(10px);
-      color:white;
-      text-decoration:none;
-      font-family:'Inter', sans-serif;
-      text-transform:uppercase;
-      letter-spacing:.2em;
-      font-size:.75rem;
-      transition:.35s;
-    }
-
-    .hero-btn:hover{
-      background:var(--gold);
-      color:#111;
-      transform:translateY(-3px);
-      box-shadow:0 12px 30px rgba(212,175,55,.3);
-    }
-
-    /* ORNAMENT */
-    .ornament{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:18px;
-      margin:70px 0 50px;
-      color:var(--gold);
-    }
-
-    .ornament::before,
-    .ornament::after{
-      content:'';
-      width:120px;
-      height:1px;
-      background:linear-gradient(to right, transparent, var(--gold));
-    }
-
-    /* SECTION */
-    .cards-section{
-      width:min(1300px, 92%);
-      margin:auto;
-      padding-bottom:100px;
-    }
-
-    .section-title{
-      text-align:center;
-      margin-bottom:50px;
-    }
-
-    .section-title h3{
-      font-family:'Cinzel', serif;
-      font-size:2.8rem;
-      color:white;
-      margin-bottom:12px;
-    }
-
-    .section-title p{
-      color:var(--muted);
-      font-size:1.1rem;
-    }
-
-    .cards-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:32px;
-    }
-
-    /* CARD */
-    .category-block{
-      border-radius:24px;
-      overflow:hidden;
-      background:linear-gradient(
-        180deg,
-        rgba(255,255,255,.06),
-        rgba(255,255,255,.03)
-      );
-      border:1px solid rgba(255,255,255,.08);
-      backdrop-filter:blur(12px);
-      box-shadow:var(--shadow);
-      transition:.45s ease;
-      position:relative;
-    }
-
-    .category-block:hover{
-      transform:translateY(-10px);
-      border-color:rgba(212,175,55,.5);
-      box-shadow:
-      0 20px 50px rgba(0,0,0,.5),
-      0 0 30px rgba(212,175,55,.12);
-    }
-
-    .category-block::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      background:linear-gradient(
-        130deg,
-        rgba(212,175,55,.10),
-        transparent 30%
-      );
-      pointer-events:none;
-    }
-
-    .card{
-      position:relative;
-      height:270px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-    }
-
-    .card::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      background-size:cover;
-      background-position:center;
-      transition:transform .7s ease;
-      filter:brightness(.55);
-    }
-
-    .category-block:hover .card::before{
-      transform:scale(1.08);
-    }
-
-    /* IMÁGENES DE FONDO */
     .audiovisuales .card::before{ background-image:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop'); }
     .imagenes .card::before{ background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'); }
     .textos .card::before{ background-image:url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1200&auto=format&fit=crop'); }
     .audios .card::before{ background-image:url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop'); }
 
-    .card-overlay{
-      position:absolute;
-      inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.75));
-    }
+    .card-overlay{ position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.75)); }
+    .card-body{ position:relative; z-index:3; text-align:center; padding:20px; }
+    .card-icon{ font-size:3rem; margin-bottom:12px; display:block; filter:drop-shadow(0 5px 10px rgba(0,0,0,.3)); }
+    .card-label{ font-family:'Cinzel', serif; font-size:2rem; color:white; margin-bottom:12px; display:block; }
+    .card-description{ color:#d7dbe0; line-height:1.6; margin-bottom:25px; font-size:1.05rem; }
 
-    .card-body{
-      position:relative;
-      z-index:3;
-      text-align:center;
-      padding:20px;
-    }
+    .upload-btn{ border:none; cursor:pointer; padding:14px 24px; background:linear-gradient(135deg, var(--gold), #f0d37b); color:#111; border-radius:999px; font-family:'Inter', sans-serif; text-transform:uppercase; letter-spacing:.2em; font-size:.72rem; font-weight:700; transition:.35s; box-shadow:0 10px 20px rgba(212,175,55,.25); }
+    .upload-btn:hover{ transform:translateY(-3px) scale(1.03); box-shadow:0 18px 35px rgba(212,175,55,.35); }
 
-    .card-icon{
-      font-size:3rem;
-      margin-bottom:12px;
-      display:block;
-      filter:drop-shadow(0 5px 10px rgba(0,0,0,.3));
-    }
+    .file-list{ padding:18px; background:rgba(0,0,0,.18); border-top:1px solid rgba(255,255,255,.05); min-height:90px; max-height: 250px; overflow-y: auto; }
+    
+    .file-item{ display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-radius:12px; margin-bottom:10px; background:rgba(255,255,255,.03); transition:.25s; gap:10px;}
+    .file-item:hover{ background:rgba(255,255,255,.06); }
+    .file-link{ text-decoration:none; color:var(--cream); font-family:'Inter', sans-serif; font-size:.85rem; transition:.25s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; text-align: left;}
+    .file-link:hover{ color:var(--gold-soft); }
+    
+    .delete-btn { background: transparent; border: none; color: #ff6b6b; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.8rem; padding: 4px 8px; border-radius: 6px; transition: 0.2s; }
+    .delete-btn:hover { background: rgba(255,107,107,0.15); }
 
-    .card-label{
-      font-family:'Cinzel', serif;
-      font-size:2rem;
-      color:white;
-      margin-bottom:12px;
-      display:block;
-    }
+    .loader{ margin-top:18px; display:none; color:var(--gold-soft); font-family:'Inter', sans-serif; letter-spacing:.2em; text-transform:uppercase; font-size:.68rem; }
 
-    .card-description{
-      color:#d7dbe0;
-      line-height:1.6;
-      margin-bottom:25px;
-      font-size:1.05rem;
-    }
+    footer{ border-top:1px solid var(--line); padding:45px 20px; text-align:center; background:#0a0d12; }
+    footer h4{ font-family:'Cinzel', serif; color:var(--gold-soft); letter-spacing:.15em; margin-bottom:12px; }
+    footer p{ color:#8f98a3; font-size:.95rem; }
 
-    .upload-btn{
-      border:none;
-      cursor:pointer;
-      padding:14px 24px;
-      background:linear-gradient(135deg, var(--gold), #f0d37b);
-      color:#111;
-      border-radius:999px;
-      font-family:'Inter', sans-serif;
-      text-transform:uppercase;
-      letter-spacing:.2em;
-      font-size:.72rem;
-      font-weight:700;
-      transition:.35s;
-      box-shadow:0 10px 20px rgba(212,175,55,.25);
-    }
-
-    .upload-btn:hover{
-      transform:translateY(-3px) scale(1.03);
-      box-shadow:0 18px 35px rgba(212,175,55,.35);
-    }
-
-    .file-list{
-      padding:18px;
-      background:rgba(0,0,0,.18);
-      border-top:1px solid rgba(255,255,255,.05);
-      min-height:90px;
-    }
-
-    .file-link{
-      text-decoration:none;
-      color:var(--cream);
-      font-family:'Inter', sans-serif;
-      font-size:.88rem;
-      transition:.25s;
-      display:block;
-      width:100%;
-      text-align:center;
-    }
-
-    .file-link:hover{
-      color:var(--gold-soft);
-    }
-
-    /* ========================================================
-       ESTILOS DE LA VENTANA FLOTANTE (MODAL COCKPIT)
-       ======================================================== */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(5, 7, 10, 0.85);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .modal-container {
-      background: var(--bg-soft);
-      width: min(680px, 95%);
-      height: 80vh;
-      border-radius: 24px;
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      box-shadow: var(--shadow), 0 0 40px rgba(212, 175, 55, 0.1);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transform: scale(0.9);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .modal-overlay.active .modal-container {
-      transform: scale(1);
-    }
-
-    .modal-header {
-      padding: 20px 30px;
-      background: rgba(0, 0, 0, 0.2);
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-header h4 {
-      font-family: 'Cinzel', serif;
-      color: var(--gold-soft);
-      font-size: 1.3rem;
-      letter-spacing: 0.1em;
-    }
-
-    .close-modal {
-      background: transparent;
-      border: none;
-      color: var(--muted);
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .close-modal:hover {
-      color: var(--gold);
-    }
-
-    .modal-body {
-      flex: 1;
-      background: #ffffff; /* Los Forms de Google se ven mejor sobre blanco si no usas complementos oscuros */
-      position: relative;
-    }
-
-    .modal-body iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* RESPONSIVE */
     @media(max-width:768px){
       nav{ padding:20px; }
-      .hero{ min-height:75vh; }
       .hero h2{ font-size:3.4rem; }
-      .hero p{ font-size:1.1rem; }
       .cards-grid{ grid-template-columns:1fr; }
-      .modal-container { height: 90vh; }
     }
   </style>
 </head>
@@ -500,14 +138,9 @@
   </nav>
 
   <section class="hero">
-    <div class="hero-glow"></div>
     <div class="hero-content">
       <h2>Proyecto Final</h2>
-      <p>
-        Un espacio elegante y contemporáneo para preservar,
-        compartir y organizar las expresiones creativas de
-        Literatura Emergente.
-      </p>
+      <p>Un espacio elegante y contemporáneo para preservar, compartir y organizar las expresiones creativas de Literatura Emergente.</p>
       <a href="#contenido" class="hero-btn">Explorar contenido ✦</a>
     </div>
   </section>
@@ -517,12 +150,11 @@
   <section class="cards-section" id="contenido">
     <div class="section-title">
       <h3>Categorías Creativas</h3>
-      <p>Gestiona y comparte materiales audiovisuales, imágenes, textos y audios en un entorno visualmente memorable.</p>
+      <p>Gestiona y comparte materiales multimedia en tiempo real y sin límites estrictos.</p>
     </div>
 
     <div class="cards-grid">
 
-      <!-- AUDIOVISUALES -->
       <div class="category-block audiovisuales">
         <div class="card">
           <div class="card-overlay"></div>
@@ -530,22 +162,14 @@
             <span class="card-icon">🎬</span>
             <span class="card-label">Audiovisuales</span>
             <p class="card-description">Cortometrajes, videopoemas, documentales y piezas visuales.</p>
-            
-            <!-- Cambia el ID del formulario por el tuyo -->
-            <button class="upload-btn" onclick="abrirModal('https://docs.google.com/forms/d/e/1FAIpQLSfD_YOUR_FORM_ID_1/viewform?embedded=true', 'Formulario Audiovisuales')">
-              Subir archivo
-            </button>
+            <button class="upload-btn" onclick="document.getElementById('inp-av').click()">Subir archivos</button>
+            <input type="file" id="inp-av" accept="video/*" style="display:none" multiple />
+            <div id="load-audiovisuales" class="loader">Cargando...</div>
           </div>
         </div>
-        <div class="file-list">
-          <!-- Link a tu carpeta de Drive pública para ver los archivos cargados -->
-          <a href="https://drive.google.com/drive/folders/TU_ID_CARPETA_1" target="_blank" class="file-link">
-            📁 Abrir Repositorio de Videos ↗
-          </a>
-        </div>
+        <div class="file-list" id="list-audiovisuales"></div>
       </div>
 
-      <!-- IMÁGENES -->
       <div class="category-block imagenes">
         <div class="card">
           <div class="card-overlay"></div>
@@ -553,21 +177,14 @@
             <span class="card-icon">🖼️</span>
             <span class="card-label">Imágenes</span>
             <p class="card-description">Fotografías, ilustraciones y composiciones artísticas.</p>
-            
-            <!-- Cambia el ID del formulario por el tuyo -->
-            <button class="upload-btn" onclick="abrirModal('https://docs.google.com/forms/d/e/1FAIpQLSfD_YOUR_FORM_ID_2/viewform?embedded=true', 'Formulario Imágenes')">
-              Subir archivo
-            </button>
+            <button class="upload-btn" onclick="document.getElementById('inp-img').click()">Subir archivos</button>
+            <input type="file" id="inp-img" accept="image/*" style="display:none" multiple />
+            <div id="load-imagenes" class="loader">Cargando...</div>
           </div>
         </div>
-        <div class="file-list">
-          <a href="https://drive.google.com/drive/folders/TU_ID_CARPETA_2" target="_blank" class="file-link">
-            📁 Abrir Galería de Imágenes ↗
-          </a>
-        </div>
+        <div class="file-list" id="list-imagenes"></div>
       </div>
 
-      <!-- TEXTOS -->
       <div class="category-block textos">
         <div class="card">
           <div class="card-overlay"></div>
@@ -575,21 +192,14 @@
             <span class="card-icon">📝</span>
             <span class="card-label">Textos</span>
             <p class="card-description">Ensayos, poemas, novelas y documentos académicos.</p>
-            
-            <!-- Cambia el ID del formulario por el tuyo -->
-            <button class="upload-btn" onclick="abrirModal('https://docs.google.com/forms/d/e/1FAIpQLSfD_YOUR_FORM_ID_3/viewform?embedded=true', 'Formulario Textos')">
-              Subir archivo
-            </button>
+            <button class="upload-btn" onclick="document.getElementById('inp-txt').click()">Subir archivos</button>
+            <input type="file" id="inp-txt" accept=".pdf,.doc,.docx,.txt" style="display:none" multiple />
+            <div id="load-textos" class="loader">Cargando...</div>
           </div>
         </div>
-        <div class="file-list">
-          <a href="https://drive.google.com/drive/folders/TU_ID_CARPETA_3" target="_blank" class="file-link">
-            📁 Abrir Biblioteca de Textos ↗
-          </a>
-        </div>
+        <div class="file-list" id="list-textos"></div>
       </div>
 
-      <!-- AUDIOS -->
       <div class="category-block audios">
         <div class="card">
           <div class="card-overlay"></div>
@@ -597,72 +207,117 @@
             <span class="card-icon">🎙️</span>
             <span class="card-label">Audios</span>
             <p class="card-description">Podcasts, narraciones, música experimental y registros sonoros.</p>
-            
-            <!-- Cambia el ID del formulario por el tuyo -->
-            <button class="upload-btn" onclick="abrirModal('https://docs.google.com/forms/d/e/1FAIpQLSfD_YOUR_FORM_ID_4/viewform?embedded=true', 'Formulario Audios')">
-              Subir archivo
-            </button>
+            <button class="upload-btn" onclick="document.getElementById('inp-aud').click()">Subir archivos</button>
+            <input type="file" id="inp-aud" accept="audio/*" style="display:none" multiple />
+            <div id="load-audios" class="loader">Cargando...</div>
           </div>
         </div>
-        <div class="file-list">
-          <a href="https://drive.google.com/drive/folders/TU_ID_CARPETA_4" target="_blank" class="file-link">
-            📁 Abrir Fonoteca de Audios ↗
-          </a>
-        </div>
+        <div class="file-list" id="list-audios"></div>
       </div>
 
     </div>
   </section>
-
-  <!-- ========================================================
-       ESTRUCTURA DE LA VENTANA MODAL (HTML ÚNICO DINÁMICO)
-       ======================================================== -->
-  <div class="modal-overlay" id="modalForm">
-    <div class="modal-container">
-      <div class="modal-header">
-        <h4 id="modalTitle">Subir Archivo</h4>
-        <button class="close-modal" onclick="cerrarModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <!-- El iframe se cargará dinámicamente con JavaScript -->
-        <iframe id="formIframe" src="" allow="autoplay">Cargando formulario...</iframe>
-      </div>
-    </div>
-  </div>
 
   <footer>
     <h4>LUCERNA</h4>
     <p>Proyecto Final · Literatura Emergente · Por: César Hdz xd</p>
   </footer>
 
-  <!-- ========================================================
-       CONTROL SCRIPT PARA LAS VENTANAS
-       ======================================================== -->
-  <script>
-    const modal = document.getElementById('modalForm');
-    const iframe = document.getElementById('formIframe');
-    const title = document.getElementById('modalTitle');
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL, listAll, deleteObject } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
-    function abrirModal(urlFormulario, tituloCategoria) {
-      title.innerText = tituloCategoria;
-      iframe.src = urlFormulario;
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Evita scroll de fondo
-    }
+    // Credenciales extraídas directamente de tu consola de Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAHod--bThxmbIni5Egsyo9k4o1eDKLBaY",
+      authDomain: "lucerna-e4db4.firebaseapp.com",
+      projectId: "lucerna-e4db4",
+      storageBucket: "lucerna-e4db4.firebasestorage.app",
+      messagingSenderId: "574179272894",
+      appId: "1:574179272894:web:4f718b7236041a3d0a56ef"
+    };
 
-    function cerrarModal() {
-      modal.classList.remove('active');
-      iframe.src = ""; // Resetea el iframe para que no consuma datos ni conserve respuestas previas
-      document.body.style.overflow = ''; // Devuelve el scroll al body
-    }
+    // Inicializar Firebase
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
 
-    // Cerrar también si hacen clic fuera de la cajita del formulario
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) {
-        cerrarModal();
+    const categorias = ['audiovisuales', 'imagenes', 'textos', 'audios'];
+
+    // Listar todos los archivos guardados al abrir la página
+    async function listarArchivos(categoria) {
+      const listContainer = document.getElementById(`list-${categoria}`);
+      const folderRef = ref(storage, categoria);
+      
+      try {
+        const res = await listAll(folderRef);
+        listContainer.innerHTML = '';
+
+        if (res.items.length === 0) {
+          listContainer.innerHTML = `<p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>`;
+          return;
+        }
+
+        for (const itemRef of res.items) {
+          const url = await getDownloadURL(itemRef);
+          const item = document.createElement('div');
+          item.className = 'file-item';
+          item.innerHTML = `
+            <a href="${url}" target="_blank" class="file-link" title="${itemRef.name}">
+              📄 ${itemRef.name}
+            </a>
+            <button class="delete-btn" data-path="${itemRef.fullPath}">Eliminar</button>
+          `;
+          listContainer.appendChild(item);
+        }
+
+        // Configurar botones de eliminar
+        listContainer.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.onclick = async (e) => {
+            if(confirm("¿Seguro que quieres eliminar este archivo?")) {
+              const fileRef = ref(storage, e.target.getAttribute('data-path'));
+              await deleteObject(fileRef);
+              listarArchivos(categoria); // Recargar la lista
+            }
+          };
+        });
+
+      } catch (error) {
+        console.error("Error al listar archivos:", error);
       }
-    });
-  </script>
+    }
 
+    // Subir múltiples archivos
+    async function subirArchivos(input, categoria) {
+      const files = input.files;
+      if (files.length === 0) return;
+
+      const loader = document.getElementById(`load-${categoria}`);
+      loader.style.display = "block";
+
+      for (let file of files) {
+        const fileRef = ref(storage, `${categoria}/${file.name}`);
+        try {
+          await uploadBytes(fileRef, file);
+        } catch (error) {
+          console.error("Error al subir archivo:", error);
+          alert("Hubo un error al subir: " + file.name);
+        }
+      }
+
+      loader.style.display = "none";
+      input.value = ""; // Limpiar input
+      listarArchivos(categoria); // Refrescar lista en pantalla
+    }
+
+    // Asignar los eventos de subida a los inputs dinámicamente
+    document.getElementById('inp-av').onchange = function() { subirArchivos(this, 'audiovisuales'); };
+    document.getElementById('inp-img').onchange = function() { subirArchivos(this, 'imagenes'); };
+    document.getElementById('inp-txt').onchange = function() { subirArchivos(this, 'textos'); };
+    document.getElementById('inp-aud').onchange = function() { subirArchivos(this, 'audios'); };
+
+    // Cargar listas iniciales al abrir la página
+    categorias.forEach(cat => listarArchivos(cat));
+
+  </script>
 </body>
 </html>
