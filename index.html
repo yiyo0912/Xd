@@ -1,711 +1,748 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lucerna · Proyecto Final</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lucerna · Proyecto Final</title>
 
-  <!-- Bunny Fonts (Alternativa de código abierto y privada a Google Fonts) -->
-  <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|cormorant-garamond:300,400,500,600,700|inter:300,400,500,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 
-  <style>
-    :root{
-      --bg:#0d1117;
-      --bg-soft:#161b22;
-      --card:#1f2937;
-      --gold:#d4af37;
-      --gold-soft:#f6d878;
-      --cream:#f5f1e8;
-      --text:#e8ecf1;
-      --muted:#b6bec9;
-      --line:rgba(255,255,255,.08);
+  <style>
+    :root{
+      --bg:#0d1117;
+      --bg-soft:#161b22;
+      --card:#1f2937;
+      --gold:#d4af37;
+      --gold-soft:#f6d878;
+      --cream:#f5f1e8;
+      --text:#e8ecf1;
+      --muted:#b6bec9;
+      --line:rgba(255,255,255,.08);
 
-      --glass:rgba(255,255,255,.05);
-      --shadow:0 10px 40px rgba(0,0,0,.45);
-    }
+      --glass:rgba(255,255,255,.05);
+      --shadow:0 10px 40px rgba(0,0,0,.45);
+    }
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-    html{
-      scroll-behavior:smooth;
-    }
+    html{
+      scroll-behavior:smooth;
+    }
 
-    body{
-      background:
-        radial-gradient(circle at top left, rgba(212,175,55,.10), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(212,175,55,.08), transparent 25%),
-        var(--bg);
+    body{
+      background:
+        radial-gradient(circle at top left, rgba(212,175,55,.10), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(212,175,55,.08), transparent 25%),
+        var(--bg);
 
-      color:var(--text);
-      font-family:'Cormorant Garamond', serif;
-      overflow-x:hidden;
-      min-height:100vh;
-    }
+      color:var(--text);
+      font-family:'Cormorant Garamond', serif;
+      overflow-x:hidden;
+      min-height:100vh;
+    }
 
-    /* TEXTURA */
-    body::before{
-      content:'';
-      position:fixed;
-      inset:0;
-      background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events:none;
-      z-index:999;
-    }
+    /* TEXTURA */
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events:none;
+      z-index:999;
+    }
 
-    .top-line{
-      width:100%;
-      height:5px;
-      background:
-      linear-gradient(
-        90deg,
-        #5f4b17,
-        var(--gold),
-        #fff2b0,
-        var(--gold),
-        #5f4b17
-      );
-      box-shadow:0 0 15px rgba(212,175,55,.5);
-    }
+    .top-line{
+      width:100%;
+      height:5px;
+      background:
+      linear-gradient(
+        90deg,
+        #5f4b17,
+        var(--gold),
+        #fff2b0,
+        var(--gold),
+        #5f4b17
+      );
+      box-shadow:0 0 15px rgba(212,175,55,.5);
+    }
 
-    /* NAV */
-    nav{
-      width:100%;
-      padding:24px 60px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      background:rgba(13,17,23,.75);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--line);
-      position:sticky;
-      top:0;
-      z-index:50;
-    }
+    /* NAV */
+    nav{
+      width:100%;
+      padding:24px 60px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(13,17,23,.75);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
 
-    .brand{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
 
-    .brand h1{
-      font-family:'Cinzel', serif;
-      font-size:1.7rem;
-      letter-spacing:.18em;
-      color:var(--gold-soft);
-      text-transform:uppercase;
-    }
+    .brand h1{
+      font-family:'Cinzel', serif;
+      font-size:1.7rem;
+      letter-spacing:.18em;
+      color:var(--gold-soft);
+      text-transform:uppercase;
+    }
 
-    .brand span{
-      font-family:'Inter', sans-serif;
-      font-size:.72rem;
-      letter-spacing:.35em;
-      color:#d7dbe0;
-      opacity:.7;
-      text-transform:uppercase;
-    }
+    .brand span{
+      font-family:'Inter', sans-serif;
+      font-size:.72rem;
+      letter-spacing:.35em;
+      color:#d7dbe0;
+      opacity:.7;
+      text-transform:uppercase;
+    }
 
-    .nav-decoration{
-      width:90px;
-      height:1px;
-      background:linear-gradient(to right, transparent, var(--gold));
-    }
+    .nav-decoration{
+      width:90px;
+      height:1px;
+      background:linear-gradient(to right, transparent, var(--gold));
+    }
 
-    /* HERO */
-    .hero{
-      min-height:88vh;
-      position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:60px 30px;
-      overflow:hidden;
-    }
+    /* HERO */
+    .hero{
+      min-height:88vh;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:60px 30px;
+      overflow:hidden;
+    }
 
-    .hero::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      background:
-      linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.7)),
-      url('https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1920&auto=format&fit=crop');
-      background-size:cover;
-      background-position:center;
-      filter:brightness(.55);
-      transform:scale(1.05);
-    }
+    .hero::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+      linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.7)),
+      url('https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1920&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      filter:brightness(.55);
+      transform:scale(1.05);
+    }
 
-    .hero-glow{
-      position:absolute;
-      width:600px;
-      height:600px;
-      background:radial-gradient(circle, rgba(212,175,55,.18), transparent 70%);
-      filter:blur(30px);
-      animation:float 8s ease-in-out infinite;
-    }
+    .hero-glow{
+      position:absolute;
+      width:600px;
+      height:600px;
+      background:radial-gradient(circle, rgba(212,175,55,.18), transparent 70%);
+      filter:blur(30px);
+      animation:float 8s ease-in-out infinite;
+    }
 
-    @keyframes float{
-      0%{transform:translateY(0px);}
-      50%{transform:translateY(-25px);}
-      100%{transform:translateY(0px);}
-    }
+    @keyframes float{
+      0%{transform:translateY(0px);}
+      50%{transform:translateY(-25px);}
+      100%{transform:translateY(0px);}
+    }
 
-    .hero-content{
-      position:relative;
-      z-index:2;
-      max-width:900px;
-    }
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:900px;
+    }
 
-    .hero-sub{
-      font-family:'Inter', sans-serif;
-      text-transform:uppercase;
-      letter-spacing:.45em;
-      color:var(--gold-soft);
-      font-size:.8rem;
-      margin-bottom:22px;
-    }
+    .hero-sub{
+      font-family:'Inter', sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.45em;
+      color:var(--gold-soft);
+      font-size:.8rem;
+      margin-bottom:22px;
+    }
 
-    .hero h2{
-      font-family:'Cinzel', serif;
-      font-size:clamp(3.5rem, 8vw, 6.5rem);
-      line-height:1;
-      color:#fff;
-      text-shadow:0 10px 30px rgba(0,0,0,.6);
-      margin-bottom:25px;
-    }
+    .hero h2{
+      font-family:'Cinzel', serif;
+      font-size:clamp(3.5rem, 8vw, 6.5rem);
+      line-height:1;
+      color:#fff;
+      text-shadow:0 10px 30px rgba(0,0,0,.6);
+      margin-bottom:25px;
+    }
 
-    .hero p{
-      max-width:760px;
-      margin:auto;
-      font-size:1.35rem;
-      color:#e5e7eb;
-      line-height:1.7;
-    }
+    .hero p{
+      max-width:760px;
+      margin:auto;
+      font-size:1.35rem;
+      color:#e5e7eb;
+      line-height:1.7;
+    }
 
-    .hero-btn{
-      margin-top:40px;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:15px 28px;
-      border:1px solid rgba(255,255,255,.2);
-      background:rgba(255,255,255,.08);
-      backdrop-filter:blur(10px);
-      color:white;
-      text-decoration:none;
-      font-family:'Inter', sans-serif;
-      text-transform:uppercase;
-      letter-spacing:.2em;
-      font-size:.75rem;
-      transition:.35s;
-    }
+    .hero-btn{
+      margin-top:40px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:15px 28px;
+      border:1px solid rgba(255,255,255,.2);
+      background:rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);
+      color:white;
+      text-decoration:none;
+      font-family:'Inter', sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.2em;
+      font-size:.75rem;
+      transition:.35s;
+    }
 
-    .hero-btn:hover{
-      background:var(--gold);
-      color:#111;
-      transform:translateY(-3px);
-      box-shadow:0 12px 30px rgba(212,175,55,.3);
-    }
+    .hero-btn:hover{
+      background:var(--gold);
+      color:#111;
+      transform:translateY(-3px);
+      box-shadow:0 12px 30px rgba(212,175,55,.3);
+    }
 
-    /* ORNAMENT */
-    .ornament{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:18px;
-      margin:70px 0 50px;
-      color:var(--gold);
-    }
+    /* ORNAMENT */
+    .ornament{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+      margin:70px 0 50px;
+      color:var(--gold);
+    }
 
-    .ornament::before,
-    .ornament::after{
-      content:'';
-      width:120px;
-      height:1px;
-      background:linear-gradient(to right, transparent, var(--gold));
-    }
+    .ornament::before,
+    .ornament::after{
+      content:'';
+      width:120px;
+      height:1px;
+      background:linear-gradient(to right, transparent, var(--gold));
+    }
 
-    /* SECTION */
-    .cards-section{
-      width:min(1300px, 92%);
-      margin:auto;
-      padding-bottom:100px;
-    }
+    /* SECTION */
+    .cards-section{
+      width:min(1300px, 92%);
+      margin:auto;
+      padding-bottom:100px;
+    }
 
-    .section-title{
-      text-align:center;
-      margin-bottom:50px;
-    }
+    .section-title{
+      text-align:center;
+      margin-bottom:50px;
+    }
 
-    .section-title h3{
-      font-family:'Cinzel', serif;
-      font-size:2.8rem;
-      color:white;
-      margin-bottom:12px;
-    }
+    .section-title h3{
+      font-family:'Cinzel', serif;
+      font-size:2.8rem;
+      color:white;
+      margin-bottom:12px;
+    }
 
-    .section-title p{
-      color:var(--muted);
-      font-size:1.1rem;
-    }
+    .section-title p{
+      color:var(--muted);
+      font-size:1.1rem;
+    }
 
-    .cards-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:32px;
-    }
+    .cards-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:32px;
+    }
 
-    /* CARD */
-    .category-block{
-      border-radius:24px;
-      overflow:hidden;
-      background:linear-gradient(
-        180deg,
-        rgba(255,255,255,.06),
-        rgba(255,255,255,.03)
-      );
-      border:1px solid rgba(255,255,255,.08);
-      backdrop-filter:blur(12px);
-      box-shadow:var(--shadow);
-      transition:.45s ease;
-      position:relative;
-    }
+    /* CARD */
+    .category-block{
+      border-radius:24px;
+      overflow:hidden;
+      background:linear-gradient(
+        180deg,
+        rgba(255,255,255,.06),
+        rgba(255,255,255,.03)
+      );
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(12px);
+      box-shadow:var(--shadow);
+      transition:.45s ease;
+      position:relative;
+    }
 
-    .category-block:hover{
-      transform:translateY(-10px);
-      border-color:rgba(212,175,55,.5);
-      box-shadow:
-      0 20px 50px rgba(0,0,0,.5),
-      0 0 30px rgba(212,175,55,.12);
-    }
+    .category-block:hover{
+      transform:translateY(-10px);
+      border-color:rgba(212,175,55,.5);
+      box-shadow:
+      0 20px 50px rgba(0,0,0,.5),
+      0 0 30px rgba(212,175,55,.12);
+    }
 
-    .category-block::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      background:linear-gradient(
-        130deg,
-        rgba(212,175,55,.10),
-        transparent 30%
-      );
-      pointer-events:none;
-    }
+    .category-block::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        130deg,
+        rgba(212,175,55,.10),
+        transparent 30%
+      );
+      pointer-events:none;
+    }
 
-    .card{
-      position:relative;
-      height:270px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-    }
+    .card{
+      position:relative;
+      height:270px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
 
-    .card::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      background-size:cover;
-      background-position:center;
-      transition:transform .7s ease;
-      filter:brightness(.55);
-    }
+    .card::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      transition:transform .7s ease;
+      filter:brightness(.55);
+    }
 
-    .category-block:hover .card::before{
-      transform:scale(1.08);
-    }
+    .category-block:hover .card::before{
+      transform:scale(1.08);
+    }
 
-    /* IMÁGENES */
-    .audiovisuales .card::before{
-      background-image:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop');
-    }
+    /* IMÁGENES */
+    .audiovisuales .card::before{
+      background-image:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop');
+    }
 
-    .imagenes .card::before{
-      background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop');
-    }
+    .imagenes .card::before{
+      background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop');
+    }
 
-    .textos .card::before{
-      background-image:url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1200&auto=format&fit=crop');
-    }
+    .textos .card::before{
+      background-image:url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1200&auto=format&fit=crop');
+    }
 
-    .audios .card::before{
-      background-image:url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop');
-    }
+    .audios .card::before{
+      background-image:url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop');
+    }
 
-    .card-overlay{
-      position:absolute;
-      inset:0;
-      background:
-      linear-gradient(
-        180deg,
-        rgba(0,0,0,.15),
-        rgba(0,0,0,.75)
-      );
-    }
+    .card-overlay{
+      position:absolute;
+      inset:0;
+      background:
+      linear-gradient(
+        180deg,
+        rgba(0,0,0,.15),
+        rgba(0,0,0,.75)
+      );
+    }
 
-    .card-body{
-      position:relative;
-      z-index:3;
-      text-align:center;
-      padding:20px;
-    }
+    .card-body{
+      position:relative;
+      z-index:3;
+      text-align:center;
+      padding:20px;
+    }
 
-    .card-icon{
-      font-size:3rem;
-      margin-bottom:12px;
-      display:block;
-      filter:drop-shadow(0 5px 10px rgba(0,0,0,.3));
-    }
+    .card-icon{
+      font-size:3rem;
+      margin-bottom:12px;
+      display:block;
+      filter:drop-shadow(0 5px 10px rgba(0,0,0,.3));
+    }
 
-    .card-label{
-      font-family:'Cinzel', serif;
-      font-size:2rem;
-      color:white;
-      margin-bottom:12px;
-      display:block;
-    }
+    .card-label{
+      font-family:'Cinzel', serif;
+      font-size:2rem;
+      color:white;
+      margin-bottom:12px;
+      display:block;
+    }
 
-    .card-description{
-      color:#d7dbe0;
-      line-height:1.6;
-      margin-bottom:25px;
-      font-size:1.05rem;
-    }
+    .card-description{
+      color:#d7dbe0;
+      line-height:1.6;
+      margin-bottom:25px;
+      font-size:1.05rem;
+    }
 
-    /* BOTÓN */
-    .upload-btn{
-      border:none;
-      cursor:pointer;
-      padding:14px 24px;
-      background:linear-gradient(
-        135deg,
-        var(--gold),
-        #f0d37b
-      );
-      color:#111;
-      border-radius:999px;
-      font-family:'Inter', sans-serif;
-      text-transform:uppercase;
-      letter-spacing:.2em;
-      font-size:.72rem;
-      font-weight:700;
-      transition:.35s;
-      box-shadow:0 10px 20px rgba(212,175,55,.25);
-    }
+    /* BOTÓN */
+    .upload-btn{
+      border:none;
+      cursor:pointer;
+      padding:14px 24px;
+      background:linear-gradient(
+        135deg,
+        var(--gold),
+        #f0d37b
+      );
+      color:#111;
+      border-radius:999px;
+      font-family:'Inter', sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.2em;
+      font-size:.72rem;
+      font-weight:700;
+      transition:.35s;
+      box-shadow:0 10px 20px rgba(212,175,55,.25);
+    }
 
-    .upload-btn:hover{
-      transform:translateY(-3px) scale(1.03);
-      box-shadow:0 18px 35px rgba(212,175,55,.35);
-    }
+    .upload-btn:hover{
+      transform:translateY(-3px) scale(1.03);
+      box-shadow:0 18px 35px rgba(212,175,55,.35);
+    }
 
-    .file-list{
-      padding:18px;
-      background:rgba(0,0,0,.18);
-      border-top:1px solid rgba(255,255,255,.05);
-      min-height:90px;
-    }
+    .file-list{
+      padding:18px;
+      background:rgba(0,0,0,.18);
+      border-top:1px solid rgba(255,255,255,.05);
+      min-height:90px;
+    }
 
-    .file-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:12px 14px;
-      border-radius:12px;
-      margin-bottom:10px;
-      background:rgba(255,255,255,.03);
-      transition:.25s;
-      gap: 15px;
-    }
+    .file-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 14px;
+      border-radius:12px;
+      margin-bottom:10px;
+      background:rgba(255,255,255,.03);
+      transition:.25s;
+    }
 
-    .file-item:hover{
-      background:rgba(255,255,255,.06);
-    }
+    .file-item:hover{
+      background:rgba(255,255,255,.06);
+    }
 
-    .file-link{
-      text-decoration:none;
-      color:var(--cream);
-      font-family:'Inter', sans-serif;
-      font-size:.88rem;
-      transition:.25s;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 85%;
-    }
+    .file-link{
+      text-decoration:none;
+      color:var(--cream);
+      font-family:'Inter', sans-serif;
+      font-size:.88rem;
+      transition:.25s;
+    }
 
-    .file-link:hover{
-      color:var(--gold-soft);
-    }
+    .file-link:hover{
+      color:var(--gold-soft);
+    }
 
-    /* BOTÓN ELIMINAR ARTÍSTICO */
-    .delete-btn {
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 0.9rem;
-      cursor: pointer;
-      padding: 2px 6px;
-      transition: color .25s, transform .2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .loader{
+      margin-top:18px;
+      display:none;
+      color:var(--gold-soft);
+      font-family:'Inter', sans-serif;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      font-size:.68rem;
+    }
 
-    .delete-btn:hover {
-      color: #ff6b6b;
-      transform: scale(1.15);
-    }
+    /* FOOTER */
+    footer{
+      border-top:1px solid var(--line);
+      padding:45px 20px;
+      text-align:center;
+      background:#0a0d12;
+    }
 
-    .loader{
-      margin-top:18px;
-      display:none;
-      color:var(--gold-soft);
-      font-family:'Inter', sans-serif;
-      letter-spacing:.2em;
-      text-transform:uppercase;
-      font-size:.68rem;
-    }
+    footer h4{
+      font-family:'Cinzel', serif;
+      color:var(--gold-soft);
+      letter-spacing:.15em;
+      margin-bottom:12px;
+    }
 
-    /* FOOTER */
-    footer{
-      border-top:1px solid var(--line);
-      padding:45px 20px;
-      text-align:center;
-      background:#0a0d12;
-    }
+    footer p{
+      color:#8f98a3;
+      font-size:.95rem;
+    }
 
-    footer h4{
-      font-family:'Cinzel', serif;
-      color:var(--gold-soft);
-      letter-spacing:.15em;
-      margin-bottom:12px;
-    }
+    /* RESPONSIVE */
+    @media(max-width:768px){
 
-    footer p{
-      color:#8f98a3;
-      font-size:.95rem;
-    }
+      nav{
+        padding:20px;
+      }
 
-    /* RESPONSIVE */
-    @media(max-width:768px){
-      nav{
-        padding:20px;
-      }
-      .hero{
-        min-height:75vh;
-      }
-      .hero h2{
-        font-size:3.4rem;
-      }
-      .hero p{
-        font-size:1.1rem;
-      }
-      .cards-grid{
-        grid-template-columns:1fr;
-      }
-    }
-  </style>
+      .hero{
+        min-height:75vh;
+      }
+
+      .hero h2{
+        font-size:3.4rem;
+      }
+
+      .hero p{
+        font-size:1.1rem;
+      }
+
+      .cards-grid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <div class="top-line"></div>
+  <div class="top-line"></div>
 
-  <nav>
-    <div class="brand">
-      <h1>Lucerna</h1>
-      <span>Literatura Emergente</span>
-    </div>
-    <div class="nav-decoration"></div>
-  </nav>
+  <nav>
+    <div class="brand">
+      <h1>Lucerna</h1>
+      <span>Literatura Emergente</span>
+    </div>
 
-  <section class="hero">
-    <div class="hero-glow"></div>
-    <div class="hero-content">
-      <h2>Proyecto Final</h2>
-      <p>
-        Un espacio elegante y contemporáneo para preservar,
-        compartir y organizar las expresiones creativas de
-        Literatura Emergente.
-      </p>
-      <a href="#contenido" class="hero-btn">Explorar contenido ✦</a>
-    </div>
-  </section>
+    <div class="nav-decoration"></div>
+  </nav>
 
-  <div class="ornament">✦</div>
+  <section class="hero">
 
-  <section class="cards-section" id="contenido">
-    <div class="section-title">
-      <h3>Categorías Creativas</h3>
-      <p>Gestiona y comparte materiales audiovisuales, imágenes, textos y audios de forma ágil y elegante.</p>
-    </div>
+    <div class="hero-glow"></div>
 
-    <div class="cards-grid">
+    <div class="hero-content">
+     
 
-      <!-- AUDIOVISUALES -->
-      <div class="category-block audiovisuales">
-        <div class="card">
-          <div class="card-overlay"></div>
-          <div class="card-body">
-            <span class="card-icon">🎬</span>
-            <span class="card-label">Audiovisuales</span>
-            <p class="card-description">Cortometrajes, videopoemas, documentales y piezas visuales.</p>
-            
-            <button class="upload-btn" onclick="document.getElementById('inp-av').click()">Subir archivos</button>
-            <input type="file" id="inp-av" accept="video/*" style="display:none" onchange="subirArchivo(this, 'audiovisuales')" multiple />
-            
-            <div id="load-audiovisuales" class="loader">Cargando...</div>
-          </div>
-        </div>
-        <div class="file-list" id="list-audiovisuales">
-          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
-        </div>
-      </div>
+      <h2>Proyecto Final</h2>
 
-      <!-- IMÁGENES -->
-      <div class="category-block imagenes">
-        <div class="card">
-          <div class="card-overlay"></div>
-          <div class="card-body">
-            <span class="card-icon">🖼️</span>
-            <span class="card-label">Imágenes</span>
-            <p class="card-description">Fotografías, ilustraciones y composiciones artísticas.</p>
-            
-            <button class="upload-btn" onclick="document.getElementById('inp-img').click()">Subir archivos</button>
-            <input type="file" id="inp-img" accept="image/*" style="display:none" onchange="subirArchivo(this, 'imagenes')" multiple />
-            
-            <div id="load-imagenes" class="loader">Cargando...</div>
-          </div>
-        </div>
-        <div class="file-list" id="list-imagenes">
-          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
-        </div>
-      </div>
+      <p>
+        Un espacio elegante y contemporáneo para preservar,
+        compartir y organizar las expresiones creativas de
+        Literatura Emergente.
+      </p>
 
-      <!-- TEXTOS -->
-      <div class="category-block textos">
-        <div class="card">
-          <div class="card-overlay"></div>
-          <div class="card-body">
-            <span class="card-icon">📝</span>
-            <span class="card-label">Textos</span>
-            <p class="card-description">Ensayos, poemas, novelas y documentos académicos.</p>
-            
-            <button class="upload-btn" onclick="document.getElementById('inp-txt').click()">Subir archivos</button>
-            <input type="file" id="inp-txt" accept=".pdf,.doc,.docx,.txt" style="display:none" onchange="subirArchivo(this, 'textos')" multiple />
-            
-            <div id="load-textos" class="loader">Cargando...</div>
-          </div>
-        </div>
-        <div class="file-list" id="list-textos">
-          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
-        </div>
-      </div>
+      <a href="#contenido" class="hero-btn">
+        Explorar contenido ✦
+      </a>
+    </div>
+  </section>
 
-      <!-- AUDIOS -->
-      <div class="category-block audios">
-        <div class="card">
-          <div class="card-overlay"></div>
-          <div class="card-body">
-            <span class="card-icon">🎙️</span>
-            <span class="card-label">Audios</span>
-            <p class="card-description">Podcasts, narraciones, música experimental y registros sonoros.</p>
-            
-            <button class="upload-btn" onclick="document.getElementById('inp-aud').click()">Subir archivos</button>
-            <input type="file" id="inp-aud" accept="audio/*" style="display:none" onchange="subirArchivo(this, 'audios')" multiple />
-            
-            <div id="load-audios" class="loader">Cargando...</div>
-          </div>
-        </div>
-        <div class="file-list" id="list-audios">
-          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
-        </div>
-      </div>
+  <div class="ornament">
+    ✦
+  </div>
 
-    </div>
-  </section>
+  <section class="cards-section" id="contenido">
 
-  <footer>
-    <h4>LUCERNA</h4>
-    <p>Proyecto Final · Literatura Emergente · Por: César Hdz xd</p>
-  </footer>
+    <div class="section-title">
+      <h3>Categorías Creativas</h3>
+      <p>
+        Gestiona y comparte materiales audiovisuales,
+        imágenes, textos y audios en un entorno visualmente memorable.
+      </p>
+    </div>
 
-  <script>
-    // Lógica robusta y local para gestionar archivos
-    window.subirArchivo = (input, categoria) => {
-      const files = Array.from(input.files);
-      if (files.length === 0) return;
+    <div class="cards-grid">
 
-      const loader = document.getElementById(`load-${categoria}`);
-      const listContainer = document.getElementById(`list-${categoria}`);
-      
-      // Validación de seguridad por si algún ID cambió en el HTML
-      if (!loader || !listContainer) {
-        console.error(`Error: No se encontraron los elementos HTML para la categoría: ${categoria}`);
-        return;
-      }
+      <div class="category-block audiovisuales">
+        <div class="card">
+          <div class="card-overlay"></div>
 
-      // Activar animación de carga
-      loader.style.display = "block";
+          <div class="card-body">
+            <span class="card-icon">🎬</span>
 
-      setTimeout(() => {
-        try {
-          // Remover el aviso de "Sin archivos" si está presente
-          const placeholder = listContainer.querySelector('p');
-          if (placeholder) {
-            listContainer.innerHTML = '';
-          }
+            <span class="card-label">
+              Audiovisuales
+            </span>
 
-          // Procesar cada archivo seleccionado
-          files.forEach(file => {
-            const url = URL.createObjectURL(file);
-            const item = document.createElement('div');
-            item.className = 'file-item';
-            item.innerHTML = `
-              <a href="${url}" target="_blank" class="file-link" title="Abrir archivo original">
-                📄 ${file.name}
-              </a>
-              <button class="delete-btn" onclick="eliminarArchivo(this, '${categoria}', '${url}')" title="Eliminar archivo">✕</button>
-            `;
-            listContainer.appendChild(item);
-          });
+            <p class="card-description">
+              Cortometrajes, videopoemas, documentales y piezas visuales.
+            </p>
 
-        } catch (error) {
-          // Si algo falla, lo reporta en la consola para saber qué pasó
-          console.error("Error procesando los archivos locales:", error);
-        } finally {
-          // Esto se ejecuta SIEMPRE, garantizando que el "Cargando..." se quite
-          loader.style.display = "none";
-          input.value = ""; // Limpiar el input para permitir volver a subir el mismo archivo
-        }
-      }, 400); // 400 milisegundos de efecto visual controlado
-    };
+            <button class="upload-btn"
+              onclick="document.getElementById('inp-av').click()">
+              Subir archivo
+            </button>
 
-    window.eliminarArchivo = (btn, categoria, url) => {
-      try {
-        // Liberar la memoria del navegador
-        URL.revokeObjectURL(url);
-        
-        const item = btn.closest('.file-item');
-        if (item) item.remove();
+            <input
+              type="file"
+              id="inp-av"
+              accept="video/*"
+              style="display:none"
+              onchange="subirArchivo(this, 'audiovisuales')"
+            />
 
-        // Si la lista se queda vacía, regresar el mensaje original
-        const listContainer = document.getElementById(`list-${categoria}`);
-        if (listContainer && listContainer.children.length === 0) {
-          listContainer.innerHTML = `
-            <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
-          `;
-        }
-      } catch (error) {
-        console.error("Error al eliminar el archivo:", error);
-      }
-    };
-  </script>
+            <div id="load-audiovisuales" class="loader">
+              Cargando...
+            </div>
+          </div>
+        </div>
+
+        <div class="file-list" id="list-audiovisuales">
+          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
+        </div>
+      </div>
+
+      <div class="category-block imagenes">
+        <div class="card">
+          <div class="card-overlay"></div>
+
+          <div class="card-body">
+            <span class="card-icon">🖼️</span>
+
+            <span class="card-label">
+              Imágenes
+            </span>
+
+            <p class="card-description">
+              Fotografías, ilustraciones y composiciones artísticas.
+            </p>
+
+            <button class="upload-btn"
+              onclick="document.getElementById('inp-img').click()">
+              Subir archivo
+            </button>
+
+            <input
+              type="file"
+              id="inp-img"
+              accept="image/*"
+              style="display:none"
+              onchange="subirArchivo(this, 'imagenes')"
+            />
+
+            <div id="load-imagenes" class="loader">
+              Cargando...
+            </div>
+          </div>
+        </div>
+
+        <div class="file-list" id="list-imagenes">
+          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
+        </div>
+      </div>
+
+      <div class="category-block textos">
+        <div class="card">
+          <div class="card-overlay"></div>
+
+          <div class="card-body">
+            <span class="card-icon">📝</span>
+
+            <span class="card-label">
+              Textos
+            </span>
+
+            <p class="card-description">
+              Ensayos, poemas, novelas y documentos académicos.
+            </p>
+
+            <button class="upload-btn"
+              onclick="document.getElementById('inp-txt').click()">
+              Subir archivo
+            </button>
+
+            <input
+              type="file"
+              id="inp-txt"
+              accept=".pdf,.doc,.docx,.txt"
+              style="display:none"
+              onchange="subirArchivo(this, 'textos')"
+            />
+
+            <div id="load-textos" class="loader">
+              Cargando...
+            </div>
+          </div>
+        </div>
+
+        <div class="file-list" id="list-textos">
+          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
+        </div>
+      </div>
+
+      <div class="category-block audios">
+        <div class="card">
+          <div class="card-overlay"></div>
+
+          <div class="card-body">
+            <span class="card-icon">🎙️</span>
+
+            <span class="card-label">
+              Audios
+            </span>
+
+            <p class="card-description">
+              Podcasts, narraciones, música experimental y registros sonoros.
+            </p>
+
+            <button class="upload-btn"
+              onclick="document.getElementById('inp-aud').click()">
+              Subir archivo
+            </button>
+
+            <input
+              type="file"
+              id="inp-aud"
+              accept="audio/*"
+              style="display:none"
+              onchange="subirArchivo(this, 'audios')"
+            />
+
+            <div id="load-audios" class="loader">
+              Cargando...
+            </div>
+          </div>
+        </div>
+
+        <div class="file-list" id="list-audios">
+          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <h4>LUCERNA</h4>
+    <p>Proyecto Final · Literatura Emergente · Por: César Hdz xd</p>
+  </footer>
+
+  <script>
+    // Lógica local para simular la subida sin Firebase
+    window.subirArchivo = (input, categoria) => {
+      const file = input.files[0];
+      if (!file) return;
+
+      const loader = document.getElementById(`load-${categoria}`);
+      const listContainer = document.getElementById(`list-${categoria}`);
+      
+      // Mostrar loader un momento
+      loader.style.display = "block";
+
+      setTimeout(() => {
+        // Eliminar el mensaje de "Sin archivos" si existe
+        if (listContainer.querySelector('p')) {
+          listContainer.innerHTML = '';
+        }
+
+        // Crear URL local del archivo
+        const url = URL.createObjectURL(file);
+
+        // Crear elemento en la lista
+        const item = document.createElement('div');
+        item.className = 'file-item';
+        item.innerHTML = `
+          <a href="${url}" target="_blank" class="file-link">
+            📄 ${file.name}
+          </a>
+        `;
+
+        listContainer.appendChild(item);
+        
+        loader.style.display = "none";
+        input.value = "";
+      }, 600);
+    };
+  </script>
 
 </body>
 </html>
