@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lucerna · Proyecto Final</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <!-- Bunny Fonts (Alternativa de código abierto y privada a Google Fonts) -->
+  <link href="https://fonts.bunny.net/css?family=cinzel:400,600,700|cormorant-garamond:300,400,500,600,700|inter:300,400,500,600&display=swap" rel="stylesheet" />
 
   <style>
     :root{
@@ -418,6 +419,7 @@
       margin-bottom:10px;
       background:rgba(255,255,255,.03);
       transition:.25s;
+      gap: 15px;
     }
 
     .file-item:hover{
@@ -430,10 +432,33 @@
       font-family:'Inter', sans-serif;
       font-size:.88rem;
       transition:.25s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 85%;
     }
 
     .file-link:hover{
       color:var(--gold-soft);
+    }
+
+    /* BOTÓN ELIMINAR ARTÍSTICO */
+    .delete-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 2px 6px;
+      transition: color .25s, transform .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .delete-btn:hover {
+      color: #ff6b6b;
+      transform: scale(1.15);
     }
 
     .loader{
@@ -468,23 +493,18 @@
 
     /* RESPONSIVE */
     @media(max-width:768px){
-
       nav{
         padding:20px;
       }
-
       .hero{
         min-height:75vh;
       }
-
       .hero h2{
         font-size:3.4rem;
       }
-
       .hero p{
         font-size:1.1rem;
       }
-
       .cards-grid{
         grid-template-columns:1fr;
       }
@@ -501,198 +521,107 @@
       <h1>Lucerna</h1>
       <span>Literatura Emergente</span>
     </div>
-
     <div class="nav-decoration"></div>
   </nav>
 
   <section class="hero">
-
     <div class="hero-glow"></div>
-
     <div class="hero-content">
-
-
       <h2>Proyecto Final</h2>
-
       <p>
         Un espacio elegante y contemporáneo para preservar,
         compartir y organizar las expresiones creativas de
         Literatura Emergente.
       </p>
-
-      <a href="#contenido" class="hero-btn">
-        Explorar contenido ✦
-      </a>
+      <a href="#contenido" class="hero-btn">Explorar contenido ✦</a>
     </div>
   </section>
 
-  <div class="ornament">
-    ✦
-  </div>
+  <div class="ornament">✦</div>
 
   <section class="cards-section" id="contenido">
-
     <div class="section-title">
       <h3>Categorías Creativas</h3>
-      <p>
-        Gestiona y comparte materiales audiovisuales,
-        imágenes, textos y audios en un entorno visualmente memorable.
-      </p>
+      <p>Gestiona y comparte materiales audiovisuales, imágenes, textos y audios de forma ágil y elegante.</p>
     </div>
 
     <div class="cards-grid">
 
+      <!-- AUDIOVISUALES -->
       <div class="category-block audiovisuales">
         <div class="card">
           <div class="card-overlay"></div>
-
           <div class="card-body">
             <span class="card-icon">🎬</span>
-
-            <span class="card-label">
-              Audiovisuales
-            </span>
-
-            <p class="card-description">
-              Cortometrajes, videopoemas, documentales y piezas visuales.
-            </p>
-
-            <button class="upload-btn"
-              onclick="document.getElementById('inp-av').click()">
-              Subir archivo
-            </button>
-
-            <input
-              type="file"
-              id="inp-av"
-              accept="video/*"
-              style="display:none"
-              onchange="subirArchivo(this, 'audiovisuales')"
-            />
-
-            <div id="load-audiovisuales" class="loader">
-              Cargando...
-            </div>
+            <span class="card-label">Audiovisuales</span>
+            <p class="card-description">Cortometrajes, videopoemas, documentales y piezas visuales.</p>
+            
+            <button class="upload-btn" onclick="document.getElementById('inp-av').click()">Subir archivos</button>
+            <input type="file" id="inp-av" accept="video/*" style="display:none" onchange="subirArchivo(this, 'audiovisuales')" multiple />
+            
+            <div id="load-audiovisuales" class="loader">Cargando...</div>
           </div>
         </div>
-
         <div class="file-list" id="list-audiovisuales">
           <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
         </div>
       </div>
 
+      <!-- IMÁGENES -->
       <div class="category-block imagenes">
         <div class="card">
           <div class="card-overlay"></div>
-
           <div class="card-body">
             <span class="card-icon">🖼️</span>
-
-            <span class="card-label">
-              Imágenes
-            </span>
-
-            <p class="card-description">
-              Fotografías, ilustraciones y composiciones artísticas.
-            </p>
-
-            <button class="upload-btn"
-              onclick="document.getElementById('inp-img').click()">
-              Subir archivo
-            </button>
-
-            <input
-              type="file"
-              id="inp-img"
-              accept="image/*"
-              style="display:none"
-              onchange="subirArchivo(this, 'imagenes')"
-            />
-
-            <div id="load-imagenes" class="loader">
-              Cargando...
-            </div>
+            <span class="card-label">Imágenes</span>
+            <p class="card-description">Fotografías, ilustraciones y composiciones artísticas.</p>
+            
+            <button class="upload-btn" onclick="document.getElementById('inp-img').click()">Subir archivos</button>
+            <input type="file" id="inp-img" accept="image/*" style="display:none" onchange="subirArchivo(this, 'imagenes')" multiple />
+            
+            <div id="load-imagenes" class="loader">Cargando...</div>
           </div>
         </div>
-
         <div class="file-list" id="list-imagenes">
           <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
         </div>
       </div>
 
+      <!-- TEXTOS -->
       <div class="category-block textos">
         <div class="card">
           <div class="card-overlay"></div>
-
           <div class="card-body">
             <span class="card-icon">📝</span>
-
-            <span class="card-label">
-              Textos
-            </span>
-
-            <p class="card-description">
-              Ensayos, poemas, novelas y documentos académicos.
-            </p>
-
-            <button class="upload-btn"
-              onclick="document.getElementById('inp-txt').click()">
-              Subir archivo
-            </button>
-
-            <input
-              type="file"
-              id="inp-txt"
-              accept=".pdf,.doc,.docx,.txt"
-              style="display:none"
-              onchange="subirArchivo(this, 'textos')"
-            />
-
-            <div id="load-textos" class="loader">
-              Cargando...
-            </div>
+            <span class="card-label">Textos</span>
+            <p class="card-description">Ensayos, poemas, novelas y documentos académicos.</p>
+            
+            <button class="upload-btn" onclick="document.getElementById('inp-txt').click()">Subir archivos</button>
+            <input type="file" id="inp-txt" accept=".pdf,.doc,.docx,.txt" style="display:none" onchange="subirArchivo(this, 'textos')" multiple />
+            
+            <div id="load-textos" class="loader">Cargando...</div>
           </div>
         </div>
-
         <div class="file-list" id="list-textos">
           <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
         </div>
       </div>
 
+      <!-- AUDIOS -->
       <div class="category-block audios">
         <div class="card">
           <div class="card-overlay"></div>
-
           <div class="card-body">
             <span class="card-icon">🎙️</span>
-
-            <span class="card-label">
-              Audios
-            </span>
-
-            <p class="card-description">
-              Podcasts, narraciones, música experimental y registros sonoros.
-            </p>
-
-            <button class="upload-btn"
-              onclick="document.getElementById('inp-aud').click()">
-              Subir archivo
-            </button>
-
-            <input
-              type="file"
-              id="inp-aud"
-              accept="audio/*"
-              style="display:none"
-              onchange="subirArchivo(this, 'audios')"
-            />
-
-            <div id="load-audios" class="loader">
-              Cargando...
-            </div>
+            <span class="card-label">Audios</span>
+            <p class="card-description">Podcasts, narraciones, música experimental y registros sonoros.</p>
+            
+            <button class="upload-btn" onclick="document.getElementById('inp-aud').click()">Subir archivos</button>
+            <input type="file" id="inp-aud" accept="audio/*" style="display:none" onchange="subirArchivo(this, 'audios')" multiple />
+            
+            <div id="load-audios" class="loader">Cargando...</div>
           </div>
         </div>
-
         <div class="file-list" id="list-audios">
           <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
         </div>
@@ -707,40 +636,57 @@
   </footer>
 
   <script>
-    // Lógica local para simular la subida sin Firebase
+    // Lógica limpia y local para gestionar archivos
     window.subirArchivo = (input, categoria) => {
-      const file = input.files[0];
-      if (!file) return;
+      const files = Array.from(input.files);
+      if (files.length === 0) return;
 
       const loader = document.getElementById(`load-${categoria}`);
       const listContainer = document.getElementById(`list-${categoria}`);
-
-      // Mostrar loader un momento
+      
       loader.style.display = "block";
 
       setTimeout(() => {
-        // Eliminar el mensaje de "Sin archivos" si existe
-        if (listContainer.querySelector('p')) {
+        // Remover el aviso de "Sin archivos" si está presente
+        const placeholder = listContainer.querySelector('p');
+        if (placeholder) {
           listContainer.innerHTML = '';
         }
 
-        // Crear URL local del archivo
-        const url = URL.createObjectURL(file);
-
-        // Crear elemento en la lista
-        const item = document.createElement('div');
-        item.className = 'file-item';
-        item.innerHTML = `
-          <a href="${url}" target="_blank" class="file-link">
-            📄 ${file.name}
-          </a>
-        `;
-
-        listContainer.appendChild(item);
-
+        // Procesar cada archivo subido
+        files.forEach(file => {
+          const url = URL.createObjectURL(file);
+          const item = document.createElement('div');
+          item.className = 'file-item';
+          item.innerHTML = `
+            <a href="${url}" target="_blank" class="file-link" title="Abrir archivo original">
+              📄 ${file.name}
+            </a>
+            <button class="delete-btn" onclick="eliminarArchivo(this, '${categoria}', '${url}')" title="Eliminar archivo">✕</button>
+          `;
+          listContainer.appendChild(item);
+        });
+        
         loader.style.display = "none";
-        input.value = "";
-      }, 600);
+        input.value = ""; // Limpiar input para permitir re-subidas
+      }, 500);
+    };
+
+    window.eliminarArchivo = (btn, categoria, url) => {
+      // Liberar la memoria local del objeto URL
+      URL.revokeObjectURL(url);
+      
+      // Quitar el elemento del DOM
+      const item = btn.closest('.file-item');
+      item.remove();
+
+      // Si ya no quedan archivos, restaurar el mensaje de lista vacía
+      const listContainer = document.getElementById(`list-${categoria}`);
+      if (listContainer.children.length === 0) {
+        listContainer.innerHTML = `
+          <p style="color:rgba(255,255,255,.35); font-family:Inter,sans-serif; font-size:.82rem; text-align:center; padding:18px;">Sin archivos disponibles</p>
+        `;
+      }
     };
   </script>
 
